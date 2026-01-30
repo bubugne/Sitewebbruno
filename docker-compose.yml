@@ -1,0 +1,31 @@
+services:
+  web:
+    build: ./siteweb
+    container_name: web_app
+    ports:
+      - "8080:80"
+    depends_on:
+      - db
+    networks:
+      - app_network
+
+  db:
+    image: mysql:8.0
+    container_name: db_app
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: contactbruno
+      MYSQL_USER: bruno
+      MYSQL_PASSWORD: Soleil123**
+    volumes:
+      - db_data:/var/lib/mysql
+      - .bd.sql:/docker-entrypoint-bdtdb.d/bd.sql
+    networks:
+      - app_network
+
+volumes:
+  db_data:
+
+networks:
+  app_network:
+
